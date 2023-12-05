@@ -7,138 +7,280 @@ import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
 import { DiamondIcon } from '@/components/DiamondIcon'
-import andrewGreeneImage from '@/images/avatars/andrew-greene.jpg'
-import cathleneBurrageImage from '@/images/avatars/cathlene-burrage.jpg'
-import damarisKimuraImage from '@/images/avatars/damaris-kimura.jpg'
-import dianneGuilianelliImage from '@/images/avatars/dianne-guilianelli.jpg'
-import erhartCockrinImage from '@/images/avatars/erhart-cockrin.jpg'
-import giordanoSagucioImage from '@/images/avatars/giordano-sagucio.jpg'
-import gordonSandersonImage from '@/images/avatars/gordon-sanderson.jpg'
-import heatherTerryImage from '@/images/avatars/heather-terry.jpg'
-import ibrahimFraschImage from '@/images/avatars/ibrahim-frasch.jpg'
-import jaquelinIschImage from '@/images/avatars/jaquelin-isch.jpg'
-import kimberlyParsonsImage from '@/images/avatars/kimberly-parsons.jpg'
-import parkerJohnsonImage from '@/images/avatars/parker-johnson.jpg'
-import piersWilkinsImage from '@/images/avatars/piers-wilkins.jpg'
-import richardAstley from '@/images/avatars/richard-astley.jpg'
-import rinaldoBeynonImage from '@/images/avatars/rinaldo-beynon.jpg'
-import ronniCantadoreImage from '@/images/avatars/ronni-cantadore.jpg'
-import stevenMchailImage from '@/images/avatars/steven-mchail.jpg'
-import waylonHydenImage from '@/images/avatars/waylon-hyden.jpg'
 
-const days = [
+const events = [
   {
-    name: 'Opening Day',
-    date: 'April 4',
-    dateTime: '2022-04-04',
-    speakers: [
+    name: 'Tuesday',
+    date: 'December 12',
+    dateTime: '2022-08-12',
+    artists: [
       {
-        name: 'Steven McHail',
-        role: 'Designer at Globex Corporation',
-        image: stevenMchailImage,
+        name: 'John Mayer',
+        type: 'Concert',
+        time: '19:00',
+        image: 'https://i.pinimg.com/474x/d3/5b/e4/d35be4bec547e5c27a43fba00a942215.jpg',
+        location: 'Los Angeles',
+        price: 30,
+        status: 'Available',
       },
       {
-        name: 'Jaquelin Isch',
-        role: 'UX Design at InGen',
-        image: jaquelinIschImage,
+        name: 'David Guetta',
+        type: 'Workshop',
+        time: '14:30',
+        image: 'https://i.pinimg.com/474x/62/13/38/621338e2bc98b286c9cb74ef2e39b4bf.jpg',
+        location: 'Los Angeles',
+        price: 30,
+        status: 'Available',
       },
       {
-        name: 'Dianne Guilianelli',
-        role: 'General Manager at Initech',
-        image: dianneGuilianelliImage,
+        name: 'Taylor Swift',
+        type: 'Concert',
+        time: '20:15',
+        image: 'https://i.pinimg.com/474x/d4/e1/b2/d4e1b2fd5da8f70bc716ddb98ffa9397.jpg',
+        location: 'Chicago',
+        price: 45,
+        status: 'Available',
       },
       {
-        name: 'Ronni Cantadore',
-        role: 'Design Engineer at Weyland-Yutani',
-        image: ronniCantadoreImage,
+        name: 'Ed Sheeran',
+        type: 'Concert',
+        time: '21:30',
+        image: 'https://i.pinimg.com/474x/f8/59/09/f859095b71a8cf5df2f9eca65faf31c4.jpg',
+        location: 'San Francisco',
+        price: 25,
+        status: 'Sold Out',
       },
       {
-        name: 'Erhart Cockrin',
-        role: 'Product Lead at Cyberdyne Systems',
-        image: erhartCockrinImage,
-      },
-      {
-        name: 'Parker Johnson',
-        role: 'UI Designer at MomCorp',
-        image: parkerJohnsonImage,
+        name: 'Tim Cook',
+        type: 'Conference',
+        time: '13:00',
+        image: 'https://i.pinimg.com/474x/b8/94/89/b894894eb688a3f793201d71b4f6fd64.jpg',
+        location: 'Miami',
+        price: 55,
+        status: 'Available',
       },
     ],
   },
   {
-    name: 'Speakers & Workshops',
-    date: 'April 5',
-    dateTime: '2022-04-05',
-    speakers: [
+    name: 'Wednesday',
+    date: 'December 13',
+    dateTime: '2022-08-13',
+    artists: [
       {
-        name: 'Damaris Kimura',
-        role: 'Senior Engineer at OCP',
-        image: damarisKimuraImage,
+        name: 'Elon Musk',
+        type: 'Conference',
+        time: '16:00',
+        image: 'https://i.pinimg.com/474x/62/1f/65/621f6520daaa29ad338da19b45ae3b7c.jpg',
+        location: 'Los Angeles',
+        price: 50,
+        status: 'Available',
       },
       {
-        name: 'Ibrahim Frasch',
-        role: 'Programmer at Umbrella Corp',
-        image: ibrahimFraschImage,
+        name: 'Sheryl Sandberg',
+        type: 'Conference',
+        time: '11:30',
+        image: 'https://i.pinimg.com/474x/87/7b/00/877b00d934a3a2e84ddbc808d21a1b94.jpg',
+        location: 'New York City',
+        price: 60,
+        status: 'Sold Out',
       },
       {
-        name: 'Cathlene Burrage',
-        role: 'Frontend Developer at Buy n Large',
-        image: cathleneBurrageImage,
+        name: 'Armin van Buuren',
+        type: 'Workshop',
+        time: '15:00',
+        image: 'https://i.pinimg.com/474x/f7/62/d4/f762d45bc79352dd2417a6dfd03f19fc.jpg',
+        location: 'Chicago',
+        price: 45,
+        status: 'Available',
       },
       {
-        name: 'Rinaldo Beynon',
-        role: 'Data Scientist at Rekall',
-        image: rinaldoBeynonImage,
+        name: 'Satya Nadella',
+        type: 'Conference',
+        time: '14:30',
+        image: 'https://i.pinimg.com/474x/04/4a/d1/044ad1c2782c79cafff70ec9ade95d20.jpg',
+        location: 'Chicago',
+        price: 45,
+        status: 'Available',
       },
       {
-        name: 'Waylon Hyden',
-        role: 'DevOps at RDA Corporation',
-        image: waylonHydenImage,
-      },
-      {
-        name: 'Giordano Sagucio',
-        role: 'Game Developer at Soylent Corp',
-        image: giordanoSagucioImage,
+        name: 'Martin Garrix',
+        type: 'Workshop',
+        time: '13:30',
+        image: 'https://i.pinimg.com/474x/e7/9b/da/e79bdafc7294180697e7d4b58d156104.jpg',
+        location: 'Miami',
+        price: 35,
+        status: 'Available',
       },
     ],
   },
   {
-    name: 'Interviews',
-    date: 'April 6',
-    dateTime: '2022-04-06',
-    speakers: [
+    name: 'Thursday',
+    date: 'December 14',
+    dateTime: '2022-08-14',
+    artists: [
       {
-        name: 'Andrew Greene',
-        role: 'Frontend Developer at Ultratech',
-        image: andrewGreeneImage,
+        name: 'Bruno Mars',
+        type: 'Concert',
+        time: '21:45',
+        image: 'https://i.pinimg.com/474x/c6/a1/68/c6a1686b7707aead89c5aa6ffbd41454.jpg',
+        location: 'Miami',
+        price: 35,
+        status: 'Available',
       },
       {
-        name: 'Heather Terry',
-        role: 'Backend Developer at Xanatos Enterprises',
-        image: heatherTerryImage,
+        name: 'Calvin Harris',
+        type: 'Workshop',
+        time: '11:00',
+        image: 'https://i.pinimg.com/474x/70/4c/f9/704cf9dbcd37f8aa799452947b9e8879.jpg',
+        location: 'New York City',
+        price: 40,
+        status: 'Sold Out',
       },
       {
-        name: 'Piers Wilkins',
-        role: 'Full stack Developer at BiffCo',
-        image: piersWilkinsImage,
+        name: 'Barack Obama',
+        type: 'Conference',
+        time: '16:00',
+        image: 'https://i.pinimg.com/474x/cf/f3/48/cff3482226e8409a8a54f0be9b365c2a.jpg',
+        location: 'San Francisco',
+        price: 55,
+        status: 'Sold Out',
       },
       {
-        name: 'Gordon Sanderson',
-        role: 'Mobile Developer at Cobra Industries',
-        image: gordonSandersonImage,
+        name: 'Andy Warhol',
+        type: 'Exhibition',
+        time: '16:30',
+        image: 'https://i.pinimg.com/474x/95/37/a5/9537a53de426f19954fc076fa934a2d0.jpg',
+        location: 'San Francisco',
+        price: 40,
+        status: 'Sold Out',
       },
       {
-        name: 'Kimberly Parsons',
-        role: 'Game Developer at Tyrell Corporation',
-        image: kimberlyParsonsImage,
+        name: 'Hardwell',
+        type: 'Workshop',
+        time: '16:30',
+        image: 'https://i.pinimg.com/474x/97/35/9a/97359ab44d83e0b4ff37e540d87621f3.jpg',
+        location: 'San Francisco',
+        price: 25,
+        status: 'Sold Out',
+      },
+    ],
+
+  },
+  {
+    name: 'Friday',
+    date: 'December 15',
+    dateTime: '2022-08-15',
+    artists: [
+      {
+        name: 'Pablo Picasso',
+        type: 'Exhibition',
+        time: '10:30',
+        image: 'https://i.pinimg.com/474x/98/1a/52/981a52f016e6526d00e04a428ec1469c.jpg',
+        location: 'Paris',
+        price: 20,
+        status: 'Available',
       },
       {
-        name: 'Richard Astley',
-        role: 'CEO at Roll Out',
-        image: richardAstley,
+        name: 'Leonardo da Vinci',
+        type: 'Exhibition',
+        time: '12:00',
+        image: 'https://i.pinimg.com/474x/8f/f3/4c/8ff34c7cc25f1425ec6b8d3c1ce673ed.jpg',
+        location: 'London',
+        price: 25,
+        status: 'Sold Out',
+      },
+      {
+        name: 'Rihanna',
+        type: 'Performance',
+        time: '21:00',
+        image: 'https://i.pinimg.com/474x/ef/76/c3/ef76c346e6376cf058f6e3317069cb46.jpg',
+        location: 'Miami',
+        price: 65,
+        status: 'Available',
+      },
+      {
+        name: 'Frida Kahlo',
+        type: 'Exhibition',
+        time: '15:00',
+        image: 'https://i.pinimg.com/474x/18/45/ad/1845add0f273c2f57233a0b3fb55b73f.jpg',
+        location: 'Los Angeles',
+        price: 35,
+        status: 'Available',
+      },
+      {
+        name: 'Tim Cook',
+        type: 'Conference',
+        time: '13:00',
+        image: 'https://i.pinimg.com/474x/b8/94/89/b894894eb688a3f793201d71b4f6fd64.jpg',
+        location: 'Miami',
+        price: 55,
+        status: 'Available',
       },
     ],
   },
-]
+  {
+    name: 'Saturday',
+    date: 'December 16',
+    dateTime: '2022-08-16',
+    artists: [
+      {
+        name: 'Beyoncé',
+        type: 'Performance',
+        time: '18:00',
+        image: 'https://i.pinimg.com/474x/2a/b5/4f/2ab54f27287c1073edbc1fc16db78693.jpg',
+        location: 'Los Angeles',
+        price: 55,
+        status: 'Available',
+      },
+      {
+        name: 'Lady Gaga',
+        type: 'Performance',
+        time: '19:30',
+        image: 'https://i.pinimg.com/474x/10/77/b6/1077b6b8d8b90b4350e46209dbaf4c7a.jpg',
+        location: 'New York City',
+        price: 60,
+        status: 'Sold Out',
+      },
+      {
+        name: 'Vincent van Gogh',
+        type: 'Exhibition',
+        time: '13:30',
+        image: 'https://i.pinimg.com/474x/65/a1/9d/65a19d851442d5816097cadbae1c34fa.jpg',
+        location: 'New York City',
+        price: 30,
+        status: 'Available',
+      },
+  
+      {
+        name: 'Justin Timberlake',
+        type: 'Performance',
+        time: '22:30',
+        image: 'https://i.pinimg.com/474x/cb/f7/0d/cbf70de1e78293143a45329429d7ad84.jpg',
+        location: 'Chicago',
+        price: 70,
+        status: 'Available',
+      },
+      {
+        name: 'Alicia Keys',
+        type: 'Concert',
+        time: '20:30',
+        image: 'https://i.pinimg.com/474x/b3/7c/47/b37c47186efef28e3d6ffa0d323c7a8a.jpg',
+        location: 'New York City',
+        price: 40,
+        status: 'Sold Out',
+      },
+      {
+        name: 'Adele',
+        type: 'Performance',
+        time: '21:00',
+        image: 'https://i.pinimg.com/474x/bd/0f/73/bd0f737d959bf6e98f4879a31ad7d5ea.jpg',
+        location: 'San Francisco',
+        price: 75,
+        status: 'Sold Out',
+      },
+    ],
+  },
+];
 
 function ImageClipPaths({
   id,
@@ -193,11 +335,10 @@ export function Speakers() {
             id="speakers-title"
             className="font-display text-4xl font-medium tracking-tighter text-blue-600 sm:text-5xl"
           >
-            Speakers
+            3vents
           </h2>
           <p className="mt-4 font-display text-2xl tracking-tight text-blue-900">
-            Learn from the experts on the cutting-edge of deception at the most
-            sinister companies.
+          Join event enthusiasts from all over the world and experience the most spellbinding performances from local stages to major international stadiums.
           </p>
         </div>
         <Tab.Group
@@ -210,12 +351,12 @@ export function Speakers() {
             <Tab.List className="grid auto-cols-auto grid-flow-col justify-start gap-x-8 gap-y-10 whitespace-nowrap px-4 sm:mx-auto sm:max-w-2xl sm:grid-cols-3 sm:px-0 sm:text-center lg:grid-flow-row lg:grid-cols-1 lg:text-left">
               {({ selectedIndex }) => (
                 <>
-                  {days.map((day, dayIndex) => (
-                    <div key={day.dateTime} className="relative lg:pl-8">
+                  {events.map((event, eventIndex) => (
+                    <div key={event.dateTime} className="relative lg:pl-8">
                       <DiamondIcon
                         className={clsx(
                           'absolute left-[-0.5px] top-[0.5625rem] hidden h-1.5 w-1.5 overflow-visible lg:block',
-                          dayIndex === selectedIndex
+                          eventIndex === selectedIndex
                             ? 'fill-blue-600 stroke-blue-600'
                             : 'fill-transparent stroke-slate-400',
                         )}
@@ -224,21 +365,21 @@ export function Speakers() {
                         <div
                           className={clsx(
                             'font-mono text-sm',
-                            dayIndex === selectedIndex
+                            eventIndex === selectedIndex
                               ? 'text-blue-600'
                               : 'text-slate-500',
                           )}
                         >
                           <Tab className="ui-not-focus-visible:outline-none">
                             <span className="absolute inset-0" />
-                            {day.name}
+                            {event.name}
                           </Tab>
                         </div>
                         <time
-                          dateTime={day.dateTime}
+                          dateTime={event.dateTime}
                           className="mt-1.5 block text-2xl font-semibold tracking-tight text-blue-900"
                         >
-                          {day.date}
+                          {event.date}
                         </time>
                       </div>
                     </div>
@@ -248,14 +389,14 @@ export function Speakers() {
             </Tab.List>
           </div>
           <Tab.Panels className="lg:col-span-3">
-            {days.map((day) => (
+            {events.map((event) => (
               <Tab.Panel
-                key={day.dateTime}
+                key={event.dateTime}
                 className="grid grid-cols-1 gap-x-8 gap-y-10 ui-not-focus-visible:outline-none sm:grid-cols-2 sm:gap-y-16 md:grid-cols-3"
                 unmount={false}
               >
-                {day.speakers.map((speaker, speakerIndex) => (
-                  <div key={speakerIndex}>
+                {event.artists.map((artist, artistIndex) => (
+                  <div key={artistIndex}>
                     <div className="group relative h-[17.5rem] transform overflow-hidden rounded-4xl">
                       <div
                         className={clsx(
@@ -264,27 +405,32 @@ export function Speakers() {
                             'border-blue-300',
                             'border-indigo-300',
                             'border-sky-300',
-                          ][speakerIndex % 3],
+                          ][artistIndex % 3],
                         )}
                       />
                       <div
                         className="absolute inset-0 bg-indigo-50"
-                        style={{ clipPath: `url(#${id}-${speakerIndex % 3})` }}
+                        style={{ clipPath: `url(#${id}-${artistIndex % 3})` }}
                       >
                         <Image
                           className="absolute inset-0 h-full w-full object-cover transition duration-300 group-hover:scale-110"
-                          src={speaker.image}
+                          src={artist.image}
                           alt=""
+                          width={200}
+                          height={200}
                           priority
                           sizes="(min-width: 1280px) 17.5rem, (min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
                         />
                       </div>
                     </div>
                     <h3 className="mt-8 font-display text-xl font-bold tracking-tight text-slate-900">
-                      {speaker.name}
+                      {artist.name}
                     </h3>
                     <p className="mt-1 text-base tracking-tight text-slate-500">
-                      {speaker.role}
+                      {artist.type}
+                    </p>
+                    <p className="mt-1 text-base tracking-tight text-slate-500">
+                      {artist.time}
                     </p>
                   </div>
                 ))}

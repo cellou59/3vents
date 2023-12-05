@@ -1,20 +1,20 @@
 import Image from 'next/image'
 
 import { Container } from '@/components/Container'
-import logoLaravel from '@/images/logos/laravel.svg'
-import logoMirage from '@/images/logos/mirage.svg'
-import logoStatamic from '@/images/logos/statamic.svg'
-import logoStaticKit from '@/images/logos/statickit.svg'
-import logoTransistor from '@/images/logos/transistor.svg'
-import logoTuple from '@/images/logos/tuple.svg'
+import logoAEG from '@/images/logos/AEG.png'
+import logoCevent from '@/images/logos/C event.png'
+import logoEventbrite from '@/images/logos/Eventbrite.png'
+import logoInforma from '@/images/logos/Informa.png'
+import logoLiveNation from '@/images/logos/live nation.png'
+import logoReedExhibitions from '@/images/logos/Reed Exhibitions.png'
 
 const sponsors = [
-  { name: 'Transistor', logo: logoTransistor },
-  { name: 'Tuple', logo: logoTuple },
-  { name: 'StaticKit', logo: logoStaticKit },
-  { name: 'Mirage', logo: logoMirage },
-  { name: 'Laravel', logo: logoLaravel },
-  { name: 'Statamic', logo: logoStatamic },
+  { name: 'live nation', logo: logoLiveNation },
+  { name: 'Reed Exhibitions', logo: logoReedExhibitions },
+  { name: 'Informa', logo: logoInforma },
+  { name: 'C event', logo: logoCevent },
+  { name: 'AEG', logo: logoAEG },
+  { name: 'Eventbrite', logo: logoEventbrite },
 ]
 
 export function Sponsors() {
@@ -28,7 +28,7 @@ export function Sponsors() {
           {sponsors.map((sponsor) => (
             <div
               key={sponsor.name}
-              className="flex items-center justify-center"
+              className="flex items-center justify-center grayscale"
             >
               <Image src={sponsor.logo} alt={sponsor.name} unoptimized />
             </div>
