@@ -1,10 +1,10 @@
 const hre = require("hardhat");
 
 async function main() {
-  const Ticketing = await ethers.deployContract("Ticketing");
-  await Ticketing.waitForDeployment();
+  const factory = await ethers.deployContract("Factory");
+  await factory.waitForDeployment();
 
-  console.log(`Ticketing deployed to ${Ticketing.target}`);
+  console.log(`factory deployed to ${factory.target}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
