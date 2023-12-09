@@ -2,6 +2,8 @@
 
 import { useEffect, useId, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link';
+
 import { Tab } from '@headlessui/react'
 import clsx from 'clsx'
 
@@ -12,10 +14,10 @@ const events = [
   {
     name: 'Tuesday',
     date: 'December 12',
-    dateTime: '2022-08-12',
+    dateTime: '2023-12-12',
     artists: [
       {
-        name: 'John Mayer',
+        description: 'John Mayer',
         type: 'Concert',
         time: '19:00',
         image: 'https://i.pinimg.com/474x/d3/5b/e4/d35be4bec547e5c27a43fba00a942215.jpg',
@@ -24,7 +26,7 @@ const events = [
         status: 'Available',
       },
       {
-        name: 'David Guetta',
+        description: 'David Guetta',
         type: 'Workshop',
         time: '14:30',
         image: 'https://i.pinimg.com/474x/62/13/38/621338e2bc98b286c9cb74ef2e39b4bf.jpg',
@@ -33,7 +35,7 @@ const events = [
         status: 'Available',
       },
       {
-        name: 'Taylor Swift',
+        description: 'Taylor Swift',
         type: 'Concert',
         time: '20:15',
         image: 'https://i.pinimg.com/474x/d4/e1/b2/d4e1b2fd5da8f70bc716ddb98ffa9397.jpg',
@@ -42,7 +44,7 @@ const events = [
         status: 'Available',
       },
       {
-        name: 'Ed Sheeran',
+        description: 'Ed Sheeran',
         type: 'Concert',
         time: '21:30',
         image: 'https://i.pinimg.com/474x/f8/59/09/f859095b71a8cf5df2f9eca65faf31c4.jpg',
@@ -51,7 +53,7 @@ const events = [
         status: 'Sold Out',
       },
       {
-        name: 'Tim Cook',
+        description: 'Tim Cook',
         type: 'Conference',
         time: '13:00',
         image: 'https://i.pinimg.com/474x/b8/94/89/b894894eb688a3f793201d71b4f6fd64.jpg',
@@ -64,10 +66,10 @@ const events = [
   {
     name: 'Wednesday',
     date: 'December 13',
-    dateTime: '2022-08-13',
+    dateTime: '2023-12-13',
     artists: [
       {
-        name: 'Elon Musk',
+        description: 'Elon Musk',
         type: 'Conference',
         time: '16:00',
         image: 'https://i.pinimg.com/474x/62/1f/65/621f6520daaa29ad338da19b45ae3b7c.jpg',
@@ -76,7 +78,7 @@ const events = [
         status: 'Available',
       },
       {
-        name: 'Sheryl Sandberg',
+        description: 'Sheryl Sandberg',
         type: 'Conference',
         time: '11:30',
         image: 'https://i.pinimg.com/474x/87/7b/00/877b00d934a3a2e84ddbc808d21a1b94.jpg',
@@ -85,7 +87,7 @@ const events = [
         status: 'Sold Out',
       },
       {
-        name: 'Armin van Buuren',
+        description: 'Armin van Buuren',
         type: 'Workshop',
         time: '15:00',
         image: 'https://i.pinimg.com/474x/f7/62/d4/f762d45bc79352dd2417a6dfd03f19fc.jpg',
@@ -94,7 +96,7 @@ const events = [
         status: 'Available',
       },
       {
-        name: 'Satya Nadella',
+        description: 'Satya Nadella',
         type: 'Conference',
         time: '14:30',
         image: 'https://i.pinimg.com/474x/04/4a/d1/044ad1c2782c79cafff70ec9ade95d20.jpg',
@@ -103,7 +105,7 @@ const events = [
         status: 'Available',
       },
       {
-        name: 'Martin Garrix',
+        description: 'Martin Garrix',
         type: 'Workshop',
         time: '13:30',
         image: 'https://i.pinimg.com/474x/e7/9b/da/e79bdafc7294180697e7d4b58d156104.jpg',
@@ -116,10 +118,10 @@ const events = [
   {
     name: 'Thursday',
     date: 'December 14',
-    dateTime: '2022-08-14',
+    dateTime: '2023-12-14',
     artists: [
       {
-        name: 'Bruno Mars',
+        description: 'Bruno Mars',
         type: 'Concert',
         time: '21:45',
         image: 'https://i.pinimg.com/474x/c6/a1/68/c6a1686b7707aead89c5aa6ffbd41454.jpg',
@@ -128,7 +130,7 @@ const events = [
         status: 'Available',
       },
       {
-        name: 'Calvin Harris',
+        description: 'Calvin Harris',
         type: 'Workshop',
         time: '11:00',
         image: 'https://i.pinimg.com/474x/70/4c/f9/704cf9dbcd37f8aa799452947b9e8879.jpg',
@@ -137,7 +139,7 @@ const events = [
         status: 'Sold Out',
       },
       {
-        name: 'Barack Obama',
+        description: 'Barack Obama',
         type: 'Conference',
         time: '16:00',
         image: 'https://i.pinimg.com/474x/cf/f3/48/cff3482226e8409a8a54f0be9b365c2a.jpg',
@@ -146,7 +148,7 @@ const events = [
         status: 'Sold Out',
       },
       {
-        name: 'Andy Warhol',
+        description: 'Andy Warhol',
         type: 'Exhibition',
         time: '16:30',
         image: 'https://i.pinimg.com/474x/95/37/a5/9537a53de426f19954fc076fa934a2d0.jpg',
@@ -155,7 +157,7 @@ const events = [
         status: 'Sold Out',
       },
       {
-        name: 'Hardwell',
+        description: 'Hardwell',
         type: 'Workshop',
         time: '16:30',
         image: 'https://i.pinimg.com/474x/97/35/9a/97359ab44d83e0b4ff37e540d87621f3.jpg',
@@ -169,10 +171,10 @@ const events = [
   {
     name: 'Friday',
     date: 'December 15',
-    dateTime: '2022-08-15',
+    dateTime: '2023-12-15',
     artists: [
       {
-        name: 'Pablo Picasso',
+        description: 'Pablo Picasso',
         type: 'Exhibition',
         time: '10:30',
         image: 'https://i.pinimg.com/474x/98/1a/52/981a52f016e6526d00e04a428ec1469c.jpg',
@@ -181,7 +183,7 @@ const events = [
         status: 'Available',
       },
       {
-        name: 'Leonardo da Vinci',
+        description: 'Leonardo da Vinci',
         type: 'Exhibition',
         time: '12:00',
         image: 'https://i.pinimg.com/474x/8f/f3/4c/8ff34c7cc25f1425ec6b8d3c1ce673ed.jpg',
@@ -190,7 +192,7 @@ const events = [
         status: 'Sold Out',
       },
       {
-        name: 'Rihanna',
+        description: 'Rihanna',
         type: 'Performance',
         time: '21:00',
         image: 'https://i.pinimg.com/474x/ef/76/c3/ef76c346e6376cf058f6e3317069cb46.jpg',
@@ -199,7 +201,7 @@ const events = [
         status: 'Available',
       },
       {
-        name: 'Frida Kahlo',
+        description: 'Frida Kahlo',
         type: 'Exhibition',
         time: '15:00',
         image: 'https://i.pinimg.com/474x/18/45/ad/1845add0f273c2f57233a0b3fb55b73f.jpg',
@@ -207,24 +209,24 @@ const events = [
         price: 35,
         status: 'Available',
       },
-      {
-        name: 'Tim Cook',
-        type: 'Conference',
-        time: '13:00',
-        image: 'https://i.pinimg.com/474x/b8/94/89/b894894eb688a3f793201d71b4f6fd64.jpg',
-        location: 'Miami',
-        price: 55,
-        status: 'Available',
-      },
+      // {
+      //   description: 'Tim Cook',
+      //   type: 'Conference',
+      //   time: '13:00',
+      //   image: 'https://i.pinimg.com/474x/b8/94/89/b894894eb688a3f793201d71b4f6fd64.jpg',
+      //   location: 'Miami',
+      //   price: 55,
+      //   status: 'Available',
+      // },
     ],
   },
   {
     name: 'Saturday',
     date: 'December 16',
-    dateTime: '2022-08-16',
+    dateTime: '2023-12-16',
     artists: [
       {
-        name: 'Beyoncé',
+        description: 'Beyoncé',
         type: 'Performance',
         time: '18:00',
         image: 'https://i.pinimg.com/474x/2a/b5/4f/2ab54f27287c1073edbc1fc16db78693.jpg',
@@ -233,7 +235,7 @@ const events = [
         status: 'Available',
       },
       {
-        name: 'Lady Gaga',
+        description: 'Lady Gaga',
         type: 'Performance',
         time: '19:30',
         image: 'https://i.pinimg.com/474x/10/77/b6/1077b6b8d8b90b4350e46209dbaf4c7a.jpg',
@@ -242,7 +244,7 @@ const events = [
         status: 'Sold Out',
       },
       {
-        name: 'Vincent van Gogh',
+        description: 'Vincent van Gogh',
         type: 'Exhibition',
         time: '13:30',
         image: 'https://i.pinimg.com/474x/65/a1/9d/65a19d851442d5816097cadbae1c34fa.jpg',
@@ -252,7 +254,7 @@ const events = [
       },
   
       {
-        name: 'Justin Timberlake',
+        description: 'Justin Timberlake',
         type: 'Performance',
         time: '22:30',
         image: 'https://i.pinimg.com/474x/cb/f7/0d/cbf70de1e78293143a45329429d7ad84.jpg',
@@ -261,7 +263,7 @@ const events = [
         status: 'Available',
       },
       {
-        name: 'Alicia Keys',
+        description: 'Alicia Keys',
         type: 'Concert',
         time: '20:30',
         image: 'https://i.pinimg.com/474x/b3/7c/47/b37c47186efef28e3d6ffa0d323c7a8a.jpg',
@@ -270,7 +272,7 @@ const events = [
         status: 'Sold Out',
       },
       {
-        name: 'Adele',
+        description: 'Adele',
         type: 'Performance',
         time: '21:00',
         image: 'https://i.pinimg.com/474x/bd/0f/73/bd0f737d959bf6e98f4879a31ad7d5ea.jpg',
@@ -412,6 +414,7 @@ export function Speakers() {
                         className="absolute inset-0 bg-indigo-50"
                         style={{ clipPath: `url(#${id}-${artistIndex % 3})` }}
                       >
+                        <Link href={`/event/${artist.description}`}>
                         <Image
                           className="absolute inset-0 h-full w-full object-cover transition duration-300 group-hover:scale-110"
                           src={artist.image}
@@ -421,7 +424,9 @@ export function Speakers() {
                           priority
                           sizes="(min-width: 1280px) 17.5rem, (min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
                         />
+                        </Link>
                       </div>
+
                     </div>
                     <h3 className="mt-8 font-display text-xl font-bold tracking-tight text-slate-900">
                       {artist.name}

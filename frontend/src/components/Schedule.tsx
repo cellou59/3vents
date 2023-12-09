@@ -26,7 +26,7 @@ const events:Array<Day> = [
   {
     name: 'Tuesday',
     date: 'December 12',
-    dateTime: '2022-08-12',
+    dateTime: '2023-12-12',
     artists: [
       {
         description: 'John Mayer',
@@ -78,7 +78,7 @@ const events:Array<Day> = [
   {
     name: 'Wednesday',
     date: 'December 13',
-    dateTime: '2022-08-13',
+    dateTime: '2023-12-13',
     artists: [
       {
         description: 'Elon Musk',
@@ -130,7 +130,7 @@ const events:Array<Day> = [
   {
     name: 'Thursday',
     date: 'December 14',
-    dateTime: '2022-08-14',
+    dateTime: '2023-12-14',
     artists: [
       {
         description: 'Bruno Mars',
@@ -183,7 +183,7 @@ const events:Array<Day> = [
   {
     name: 'Friday',
     date: 'December 15',
-    dateTime: '2022-08-15',
+    dateTime: '2023-12-15',
     artists: [
       {
         description: 'Pablo Picasso',
@@ -235,7 +235,7 @@ const events:Array<Day> = [
   {
     name: 'Saturday',
     date: 'December 16',
-    dateTime: '2022-08-16',
+    dateTime: '2023-12-16',
     artists: [
       {
         description: 'Beyoncé',
