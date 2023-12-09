@@ -14,7 +14,8 @@ contract Factory {
         Concert,
         Performance,
         Workshop,
-        Conference
+        Conference,
+        Exhibition
     }
 
     struct Event {
