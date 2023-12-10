@@ -280,39 +280,39 @@ async function main() {
 
     
     console.log("Factory deployed to:", factory.target);
-    console.log("--------------------------------------");
-    let totalEventsDeployed = 0;
+  //   console.log("--------------------------------------");
+  //   let totalEventsDeployed = 0;
 
-    for (let day of events) {
-        for (let artistEvent of day.artists) {
+  //   for (let day of events) {
+  //       for (let artistEvent of day.artists) {
       
-            const eventDateTime = new Date(day.dateTime + "T" + artistEvent.time).getTime();
+  //           const eventDateTime = new Date(day.dateTime + "T" + artistEvent.time).getTime();
 
            
-            const eventType = mapEventType(artistEvent.type);
-            const ticketPrice = ethers.parseUnits((artistEvent.price).toString(), "wei");
+  //           const eventType = mapEventType(artistEvent.type);
+  //           const ticketPrice = ethers.parseUnits((artistEvent.price).toString(), "wei");
      
-            const createTx = await factory.createNFTevent(
-                artistEvent.description, 
-                artistEvent.description.substring(0.3).toUpperCase(), 
-                eventType, 
-                artistEvent.location, 
-                eventDateTime, 
-                ticketPrice, 
-                100 
-            );
+  //           const createTx = await factory.createNFTevent(
+  //               artistEvent.description, 
+  //               artistEvent.description.substring(0.3).toUpperCase(), 
+  //               eventType, 
+  //               artistEvent.location, 
+  //               eventDateTime, 
+  //               ticketPrice, 
+  //               100 
+  //           );
 
-            const txResult = await createTx.wait();
-            const ticketingAddress = txResult.logs[0].address; 
-            console.log(`Event ${artistEvent.description} created at Ticketing contract: ${ticketingAddress}, price : ${ticketPrice}`);
-            totalEventsDeployed++;
+  //           const txResult = await createTx.wait();
+  //           const ticketingAddress = txResult.logs[0].address; 
+  //           console.log(`Event ${artistEvent.description} created at Ticketing contract: ${ticketingAddress}, price : ${ticketPrice}`);
+  //           totalEventsDeployed++;
 
-        }
-    }
-  console.log(`---------------------------------------------------------------------`);
-  console.log(`Total number of events deployed: ${totalEventsDeployed}`);
-  await displayEventCounts(factory);
-  console.log("--------------------------------------");
+  //       }
+  //   }
+  // console.log(`---------------------------------------------------------------------`);
+  // console.log(`Total number of events deployed: ${totalEventsDeployed}`);
+  // await displayEventCounts(factory);
+  // console.log("--------------------------------------");
   console.log("Factory deployed to:", factory.target);
   console.log("--------------------------------------");
 }
