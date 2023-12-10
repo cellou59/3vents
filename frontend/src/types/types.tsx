@@ -2,9 +2,10 @@ export interface Day {
     name: string
     date: React.ReactNode
     dateTime: string
-    artists: Artist[]
+    performers: Performer[]
 }
-export interface Artist{
+export interface Performer{
+    name: string 
     description: string | null
     type: string
     time: string

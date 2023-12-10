@@ -1,27 +1,25 @@
-import { useRouter } from 'next/router';
-import { events } from "@/constants/db";
-import { Day, Artist } from "@/types/types";
+"use client";
+
+import { useSearchParams  } from 'next/navigation'
+import { useEffect,useState } from 'react'
+
+import { Performer } from "@/types/types";
 import Purchase from '@/components/Purchase';
 
-export default function EventPage({ params }: { params: any }) {
-  const { artistName } = params;
-  const event: Day | undefined = events.find((day: Day) =>
-    day.artists.some((artist: Artist) => artist.description === artistName)
-  );
-  console.log('🚀 ~ file: page.tsx:10 ~ EventPage ~ event:', event);
-
-  // Trouver l'artiste spécifique maintenant que nous avons le bon "Day"
-  const artist: Artist | undefined = event?.artists.find((artist: Artist) => artist.description === artistName);
-
-  // Gérer le cas où l'événement ou l'artiste n'est pas trouvé
-  // if (!artist) {
-  //   return <h1>{events[1].artists[0].description}</h1>;
-  // }
+export default function EventPage() {
+  const searchParams = useSearchParams()
+  const [performer, setPerformer] = useState<Performer | null>(null);
+ 
+  useEffect(() => {
+    const dataParams = searchParams.get('data');
+    const dataObject = JSON.parse(dataParams || '{}');
+    setPerformer(dataObject);
+   
+  }, [searchParams])
 
   return(
     <>
-     <h1>ececve</h1>
-    {/* <Purchase/>  */}
+     <Purchase performer={performer}/>  
     </>
   ) 
 }
