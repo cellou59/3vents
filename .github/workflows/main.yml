@@ -1,0 +1,28 @@
+name: CI/CD for Hardhat
+
+on:
+  push:
+    tags:
+      - "*"
+    branches:
+      - "*"
+
+concurrency:
+  group: ci-cd-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    name: Tests and Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install, compile, test, and generate coverage
+        run: |
+          cd "Alyra_projects/Developpeur-Ethereum-Template-master/4. Testing/Projet2"
+          ls -al
+          yarn install
+          yarn hardhat compile
+          yarn hardhat coverage
