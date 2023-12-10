@@ -277,7 +277,10 @@ async function main() {
 
     const factory = await ethers.deployContract("Factory");
     await factory.waitForDeployment();
-    console.log("Factory deployed to:", factory.address);
+
+    
+    console.log("Factory deployed to:", factory.target);
+    console.log("--------------------------------------");
     let totalEventsDeployed = 0;
 
     for (let day of events) {
@@ -309,6 +312,9 @@ async function main() {
   console.log(`---------------------------------------------------------------------`);
   console.log(`Total number of events deployed: ${totalEventsDeployed}`);
   await displayEventCounts(factory);
+  console.log("--------------------------------------");
+  console.log("Factory deployed to:", factory.target);
+  console.log("--------------------------------------");
 }
 
 function mapEventType(type:string) {

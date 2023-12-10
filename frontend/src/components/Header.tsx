@@ -1,4 +1,5 @@
-import { Button } from '@/components/Button'
+'use client'
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Container } from '@/components/Container'
 import { DiamondIcon } from '@/components/DiamondIcon'
 import { Logo } from '@/components/Logo'
@@ -23,7 +24,7 @@ export function Header() {
           </div>
         </div> */}
         <div className="hidden sm:mt-10 sm:flex lg:mt-0 lg:grow lg:basis-0 lg:justify-end">
-          <Button href="#">Connect your wallet</Button>
+          <ConnectButton></ConnectButton>
         </div>
       </Container>
     </header>

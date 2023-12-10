@@ -44,8 +44,13 @@ contract Factory {
 
         _;
     }
-    function getOwner() public view returns(address){
-      return owner;
+    /**
+      * @notice Check if an address is the owner of the contract
+      * @param _address The address to check
+      * @return bool True if the address is the owner, false otherwise
+      */
+    function isOwner(address _address) public view returns (bool) {
+        return _address == owner;
     }
     /**
       * @notice Deploy the ERC-721 event contract of the artist caller to be able to create NFTs later
