@@ -53,10 +53,17 @@ contract Factory {
         return _address == owner;
     }
     /**
-      * @notice Deploy the ERC-721 event contract of the artist caller to be able to create NFTs later
-      *
-      * @return eventAddress the address of the created event contract
-      */
+     * @notice Creates a new NFT event contract for managing event tickets
+     * @param _eventName Name of the event
+     * @param _symbol Symbol for the NFT
+     * @param _evenType Type of the event
+     * @param _location Location of the event
+     * @param _date Date of the event
+     * @param _ticketPrice Price of each ticket
+     * @param _totalTickets Total number of tickets for the event
+     * @return eventAddress Address of the newly created NFT event contract
+     * @dev Deploys a new Ticketing contract and initializes it with the provided parameters
+     */
     function createNFTevent(string memory _eventName, string memory _symbol, EventType _evenType, string memory _location,uint256 _date, uint256 _ticketPrice, uint256 _totalTickets) external 
     onlyOwner returns (address eventAddress) {
         bytes memory eventBytecode = type(Ticketing).creationCode;		
@@ -77,14 +84,19 @@ contract Factory {
         emit TicketingContractCreated(eventAddress);
     }
     /**
-      * @notice Withdraw funds from a Ticketing contract
-      * @param _eventAddress The address of the Ticketing contract
-      */
+     * @notice Withdraws funds from the Ticketing contract
+     * @param _eventAddress Address of the Ticketing contract
+     * @dev Withdraws all funds from the specified Ticketing contract and sends them to the contract owner
+     */
     function withdrawFromTicketing(address _eventAddress) external  onlyOwner {
         // Call the withdraw function of the Ticketing contract
         Ticketing(_eventAddress).withdraw();
     }
     receive() external payable { }
+    /**
+     * @notice Withdraws Ether from the contract
+     * @dev Allows the owner to withdraw all Ether contained in the contract
+     */
     function withdraw() public onlyOwner {
         uint balance = address(this).balance;
         if (balance == 0) revert NoEtherLeftToWithdraw();

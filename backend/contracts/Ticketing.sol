@@ -58,7 +58,15 @@ contract Ticketing is ERC721Enumerable,Ownable{
     constructor() ERC721('', '') 
     Ownable(msg.sender) 
     {}
-    
+    /**
+     * @notice Initializes the ticketing contract with event details
+     * @param name_ The name of the event
+     * @param symbol_ The symbol for the ticket tokens
+     * @param _date The date of the event
+     * @param _priceTicket The price of each ticket
+     * @param _totalTickets The total number of tickets available for the event
+     * @dev Sets up the event details and associates the gamification token with the contract owner
+     */
     function init(string calldata name_, string calldata symbol_, uint _date, uint _priceTicket, uint _totalTickets  ) public {
         _name = name_;
         _symbol = symbol_;
@@ -69,7 +77,13 @@ contract Ticketing is ERC721Enumerable,Ownable{
         gamificationToken = IERC20(msg.sender);
     }
 
-
+    /**
+     * @notice Buys tickets for the event
+     * @param _eventId The identifier of the event
+     * @param _numberOfTickets The number of tickets to purchase
+     * @param _classOfTicket An array of ticket classes corresponding to each ticket
+     * @dev Requires the event not to have occurred yet and sufficient tickets to be available
+     */
     function buyTickets(uint _eventId, uint256 _numberOfTickets, uint[] memory _classOfTicket ) external payable {
         if (date <= block.timestamp) revert EventAlreadyOccurred();
         if (ticketSold + _numberOfTickets > totalTickets) revert NotEnoughTicketsAvailable();
@@ -210,6 +224,10 @@ contract Ticketing is ERC721Enumerable,Ownable{
         tickets[owner][indexToRemove] = tickets[owner][tickets[owner].length - 1];
         tickets[owner].pop();
     }
+    /**
+     * @notice Withdraws the contract's balance to the owner's address
+     * @dev Can only be called by the contract owner
+     */
 
     function withdraw() public payable onlyOwner {
         uint balance = address(this).balance;
