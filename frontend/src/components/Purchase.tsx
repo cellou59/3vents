@@ -1,9 +1,14 @@
 "use client";
 
 import { useState, useEffect} from 'react'
-import { useSearchParams, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
+
+import { useAccount, usePublicClient} from "wagmi";
+
+import { UseBuyTicket } from "@/hooks/useBuyTicket";
+
 import { Performer } from "@/types/types";
-import { CheckIcon, QuestionMarkCircleIcon, StarIcon } from '@heroicons/react/20/solid'
+import { CheckIcon, QuestionMarkCircleIcon, StarIcon,ExclamationTriangleIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
 import { SparklesIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
@@ -46,20 +51,56 @@ const reviews = { average: 4, totalCount: 1624 }
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
+const getTicketClassNumber = (ticketClass: string): number => {
+    switch (ticketClass) {
+      case 'EarlyBird':
+        return 1;
+      case 'Regular':
+        return 2;
+      case 'Premium':
+        return 3;
+      case 'VIP':
+        return 4;
+      default:
+        return 0; // Une valeur par défaut en cas de non-correspondance
+    }
+  };
+  
 
 export default function Purchase({performer}: Props) {
-    const pathname = usePathname()
+    const { isConnected } = useAccount();
+    const [contractAddress, setContractAddress] = useState<string | null>(null);
+    const [contractId, setContractId] = useState<bigint | null>(null);
+    const [classOfTicket, setClassOfTicket] = useState<number[] | null>(null);
+    
+    const [selectedType, setSelectedType] = useState(ticketTypes[0])
     const breadcrumbs = [
         { id: 1, name: 'Event', href: '/' },
         { id: 2, name: performer?.name, href: '#' },
     ]
 
-    useEffect(() => {
-    console.log('🚀 ~ file: Purchase.tsx:64 ~ useEffect ~ pathname:', pathname)
-}, [pathname])
+    
+   
+    const { buyTicket, isLoading } = UseBuyTicket(
+        contractAddress,
+        contractId,
+        BigInt(1),
+        classOfTicket
+    );
+    
+    const handleBuyTicket = () => {
+        if (!performer || !performer.eventAddress || !performer.eventId) {
+            console.error("No performer data available");
+            return;
+        }
+    
+        const ticketClassNumber:number= getTicketClassNumber(selectedType.grade);
+        setClassOfTicket([ticketClassNumber]);
+        setContractAddress(performer.eventAddress);
+        setContractId(BigInt(performer.eventId));
 
-
-    const [selectedType, setSelectedType] = useState(ticketTypes[0])
+        buyTicket()
+    };
 
   return (
     <div className="bg-white">
@@ -163,7 +204,7 @@ export default function Purchase({performer}: Props) {
               Event options
             </h2>
 
-            <form>
+            <div>
               <div className="sm:flex sm:justify-between">
                 {/* Size selector */}
                 <RadioGroup value={selectedType} onChange={setSelectedType}>
@@ -173,7 +214,7 @@ export default function Purchase({performer}: Props) {
                      type.availability && ( <RadioGroup.Option
                         as="div"
                         key={type.grade}
-                        value={type}
+                        value={type.grade}
                         className={({ active }) =>
                           classNames(
                             active ? 'ring-2 ring-indigo-500' : '',
@@ -218,24 +259,41 @@ export default function Purchase({performer}: Props) {
                   />
                 </a>
               </div>
-              <div className="mt-10">
-                <button
-                  type="submit"
-                  className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-                >
-                  Purchase ticket
-                </button>
+              {isConnected ? (<div className="">
+                <div className="mt-10">
+                    <button
+                    onClick={handleBuyTicket}
+                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                    >
+                    Purchase ticket
+                    </button>
+                </div>
+                <div className="mt-6 text-center">
+                    <a href="#" className="group inline-flex text-base font-medium">
+                    <SparklesIcon
+                        className="mr-2 h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                        aria-hidden="true"
+                    />
+                    <span className="text-gray-500 hover:text-gray-700">fun Guarantee</span>
+                    </a>
+                </div>
+              </div>):(
+                <div className="mt-5 border-l-4 border-yellow-400 bg-yellow-50 p-4">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <ExclamationTriangleIcon className="h-5 w-5 text-yellow-400" aria-hidden="true" />
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-sm text-yellow-700">
+                      You have to connect at your wallet to purchase a ticket.
+                      
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="mt-6 text-center">
-                <a href="#" className="group inline-flex text-base font-medium">
-                  <SparklesIcon
-                    className="mr-2 h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                    aria-hidden="true"
-                  />
-                  <span className="text-gray-500 hover:text-gray-700">fun Guarantee</span>
-                </a>
-              </div>
-            </form>
+              )
+              }
+            </div>
           </section>
         </div>
       </div>

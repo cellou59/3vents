@@ -1,5 +1,7 @@
 "use client";
 
+import { useAccount, usePublicClient } from "wagmi";
+
 import { useSearchParams  } from 'next/navigation'
 import { useEffect,useState } from 'react'
 
@@ -13,6 +15,7 @@ export default function EventPage() {
   useEffect(() => {
     const dataParams = searchParams.get('data');
     const dataObject = JSON.parse(dataParams || '{}');
+    console.log('🚀 ~ file: page.tsx:16 ~ useEffect ~ dataObject:', dataObject)
     setPerformer(dataObject);
    
   }, [searchParams])

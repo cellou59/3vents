@@ -31,7 +31,7 @@ contract Factory {
     address owner;
     mapping(address => Event) public events;
 
-    event EventCreated(uint256 indexed eventId, string name,EventType _evenType,string location, uint256 date, uint256 ticketPrice, uint256 totalTickets);
+    event EventCreated(uint256 indexed eventId, string name,EventType _evenType,string location, uint256 date, uint256 ticketPrice, uint256 totalTickets,address indexed eventAddress);
     event TicketingContractCreated(address indexed eventAddress);
 
     constructor(){
@@ -73,7 +73,7 @@ contract Factory {
         uint256 eventId = uint256(keccak256(abi.encodePacked(_eventName, _date)));
         Event memory newEvent = Event(eventId, _eventName,_evenType, _location, _date, _ticketPrice, _totalTickets, 0);
         events[eventAddress] = newEvent;
-        emit EventCreated(eventId, _eventName,_evenType, _location, _date, _ticketPrice, _totalTickets);
+        emit EventCreated(eventId, _eventName,_evenType, _location, _date, _ticketPrice, _totalTickets, eventAddress);
         emit TicketingContractCreated(eventAddress);
     }
     /**

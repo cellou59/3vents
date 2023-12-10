@@ -9,9 +9,11 @@ import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
 import { DiamondIcon } from '@/components/DiamondIcon'
-
-import { events } from "@/constants/db";
-
+import { Event,Performer,Day } from "@/types/types";
+import { eventsDetails } from "@/constants/db";
+interface Props {
+  events:Event[]
+}
 
 function ImageClipPaths({
   id,
@@ -34,10 +36,10 @@ function ImageClipPaths({
   )
 }
 
-export function Speakers() {
+export function Speakers({events}: Props)  {
   let id = useId()
   let [tabOrientation, setTabOrientation] = useState('horizontal')
-
+  const [daysSchedule, setDaysSchedule] = useState<Day[] | null>(null);
   useEffect(() => {
     let lgMediaQuery = window.matchMedia('(min-width: 1024px)')
 
@@ -52,6 +54,41 @@ export function Speakers() {
       lgMediaQuery.removeEventListener('change', onMediaQueryChange)
     }
   }, [])
+
+  useEffect(() => {
+    const filterEventsDetails = () => {
+      if (Array.isArray(events) && events.length > 0) {
+        const filteredEventsDetails = eventsDetails.map(day => {        
+          const filteredPerformers = day.performers
+            .map(performer => {
+              const matchingEvent = events.find(event => event.name === performer.name);
+              if (matchingEvent) {              
+                return {
+                  ...performer,
+                  eventAddress: matchingEvent.eventAddress,
+                  eventId: matchingEvent.eventId
+                };
+              }
+              return performer;
+            })
+            .filter(performer => performer.eventAddress && performer.eventId); 
+  
+          return {
+            ...day, 
+            performers: filteredPerformers 
+          };
+        });
+  
+        setDaysSchedule(filteredEventsDetails);
+      }
+    };
+  
+    filterEventsDetails();
+  }, [events, eventsDetails]);
+  
+  
+
+
 
   return (
     <section
@@ -82,8 +119,8 @@ export function Speakers() {
             <Tab.List className="grid auto-cols-auto grid-flow-col justify-start gap-x-8 gap-y-10 whitespace-nowrap px-4 sm:mx-auto sm:max-w-2xl sm:grid-cols-3 sm:px-0 sm:text-center lg:grid-flow-row lg:grid-cols-1 lg:text-left">
               {({ selectedIndex }) => (
                 <>
-                  {events.map((event, eventIndex) => (
-                    <div key={event.dateTime} className="relative lg:pl-8">
+                  {daysSchedule && daysSchedule.map((daySchedule, eventIndex) => (
+                    <div key={daySchedule.dateTime} className="relative lg:pl-8">
                       <DiamondIcon
                         className={clsx(
                           'absolute left-[-0.5px] top-[0.5625rem] hidden h-1.5 w-1.5 overflow-visible lg:block',
@@ -103,14 +140,14 @@ export function Speakers() {
                         >
                           <Tab className="ui-not-focus-visible:outline-none">
                             <span className="absolute inset-0" />
-                            {event.name}
+                            {daySchedule.name}
                           </Tab>
                         </div>
                         <time
-                          dateTime={event.dateTime}
+                          dateTime={daySchedule.dateTime}
                           className="mt-1.5 block text-2xl font-semibold tracking-tight text-blue-900"
                         >
-                          {event.date}
+                          {daySchedule.date}
                         </time>
                       </div>
                     </div>
@@ -120,13 +157,13 @@ export function Speakers() {
             </Tab.List>
           </div>
           <Tab.Panels className="lg:col-span-3">
-            {events.map((event) => (
+            {daysSchedule && daysSchedule.map((daySchedule) => (
               <Tab.Panel
-                key={event.dateTime}
+                key={daySchedule.dateTime}
                 className="grid grid-cols-1 gap-x-8 gap-y-10 ui-not-focus-visible:outline-none sm:grid-cols-2 sm:gap-y-16 md:grid-cols-3"
                 unmount={false}
               >
-                {event.performers.map((performer, performerIndex) => (
+                {daySchedule.performers.map((performer, performerIndex:number) => (
                   <div key={performerIndex}>
                     <div className="group relative h-[17.5rem] transform overflow-hidden rounded-4xl">
                       <div

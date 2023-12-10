@@ -14,3 +14,37 @@ export interface Performer{
     price: number
     status: string
 }
+
+export interface LogEvent {
+    address: string;
+    args: EventLogInfo;
+    blockHash: string;
+    blockNumber: bigint;
+    data: string;
+    eventName: string;
+    logIndex: number;
+    removed: boolean;
+    topics: string[];
+    transactionHash: string;
+    transactionIndex: number;
+  }
+export interface EventLogInfo {
+    eventId: bigint;
+    name: string;
+    _evenType: number;
+    location: string;
+    date: bigint;
+    ticketPrice: bigint;
+    totalTickets: bigint;
+    eventAddress: `0x${string}`;
+  }
+export interface Event {
+    eventId: number;
+    name: string;
+    evenType: string;
+    location: string;
+    date: number;
+    ticketPrice: number;
+    totalTickets: number;
+    eventAddress: `0x${string}`;
+}

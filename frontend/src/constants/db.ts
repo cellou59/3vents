@@ -1,6 +1,6 @@
 import { Day } from "@/types/types";
  
-export const events: Day[] = [
+export const eventsDetails: Day[] = [
   {
     name: 'Tuesday',
     date: 'December 12',

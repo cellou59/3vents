@@ -44,7 +44,7 @@ describe("Factory Contract - deployment", function () {
     });
 
     it("Should set the correct owner on deployment", async function () {
-      expect(await factory.getOwner()).to.equal(owner.address);
+      expect(await factory.isOwner(owner.address)).to.equal(true);
     });
     //   it("Should call withdraw on the Ticketing contract", async function () {
     //     // Vous devez d'abord déployer un contrat Ticketing et simuler un scénario où il a de l'Ether à retirer

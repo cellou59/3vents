@@ -290,7 +290,7 @@ async function main() {
 
            
             const eventType = mapEventType(artistEvent.type);
-            const ticketPrice = ethers.parseUnits(artistEvent.price.toString(), "ether");
+            const ticketPrice = ethers.parseUnits((artistEvent.price).toString(), "wei");
      
             const createTx = await factory.createNFTevent(
                 artistEvent.description, 
@@ -304,7 +304,7 @@ async function main() {
 
             const txResult = await createTx.wait();
             const ticketingAddress = txResult.logs[0].address; 
-            console.log(`Event ${artistEvent.description} created at Ticketing contract: ${ticketingAddress}`);
+            console.log(`Event ${artistEvent.description} created at Ticketing contract: ${ticketingAddress}, price : ${ticketPrice}`);
             totalEventsDeployed++;
 
         }

@@ -63,6 +63,12 @@ export const factoryAbiContract = [
           "internalType": "uint256",
           "name": "totalTickets",
           "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "eventAddress",
+          "type": "address"
         }
       ],
       "name": "EventCreated",
@@ -227,7 +233,7 @@ export const factoryAbiContract = [
       "stateMutability": "payable",
       "type": "receive"
     }
-]
+  ]
 export const factoryAddress ="0x5FbDB2315678afecb367f032d93F642f64180aa3"
 export const ticketingAbiContract = [
     {
