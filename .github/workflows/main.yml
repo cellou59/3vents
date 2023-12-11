@@ -21,7 +21,7 @@ jobs:
 
       - name: Install, compile, test, and generate coverage
         run: |
-          cd "Alyra_projects/Developpeur-Ethereum-Template-master/4. Testing/Projet2"
+          cd "backend"
           ls -al
           yarn install
           yarn hardhat compile
