@@ -1,5 +1,6 @@
 # 3vents 
 lien : https://3vents.vercel.app/
+video :https://www.loom.com/share/d8758ea76e764051b911739fbe255ff7?sid=11802b2a-efd1-4555-ac76-5a81dcabd8f9
 ## Description
 
 3vents est un projet innovant conçu pour révolutionner la façon dont les événements sont organisés et expérimentés. Utilisant les dernières technologies blockchain, 3vents offre une plateforme sécurisée et transparente pour l'achat et la vente de billets d'événements. Grâce à cette approche, les utilisateurs bénéficient d'une expérience utilisateur améliorée tout en minimisant les risques de fraude et de contrefaçon de billets.
